@@ -56,7 +56,7 @@ int main() {
 }
 ```
 ### add.asm
-```x86asm
+```assembly
 .data
 
 .code
@@ -96,7 +96,7 @@ int main() {
 }
 ```
 ### isPalindrome.asm
-```x86asm
+```assembly
 .data
 
 
@@ -168,7 +168,7 @@ int main() {
 }
 ```
 ### computeSum.asm
-```x86asm
+```assembly
 .data
 
 .code
@@ -236,7 +236,7 @@ int main() {
 }
 ```
 ### reverseArrays.asm
-```x86asm
+```assembly
 .data
 
 .code
@@ -354,7 +354,7 @@ int main() {
 }
 ```
 ### findMinIndex.asm
-```x86asm
+```assembly
 .data
 
 .code
