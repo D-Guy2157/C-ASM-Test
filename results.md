@@ -415,20 +415,22 @@ END
 ```
 ### .output.txt
 ```txt
-N/A - Did not compile
+Sorted array in C: 5 9 10 13 14 21 27 29 33 37 
+Execution time in C: 0.000000 seconds.
 ```
 ### errors/issues
-Compile Errors:
+Compile Errors: (for ASM)
 ```
-Assembling: findMinIndex.asm
-findMinIndex.asm(9) : error A2022:instruction operands must be the same size
-findMinIndex.asm(15) : error A2082:cannot mix 16- and 32-bit registers
-findMinIndex.asm(16) : error A2082:cannot mix 16- and 32-bit registers
-findMinIndex.asm(42) : error A2082:cannot mix 16- and 32-bit registers
-findMinIndex.asm(43) : error A2082:cannot mix 16- and 32-bit registers
-findMinIndex.asm(44) : error A2082:cannot mix 16- and 32-bit registers
-findMinIndex.asm(45) : error A2082:cannot mix 16- and 32-bit registers
+Assembling: selectionSort.asm 
+selectionSort.asm(9) : error A2022:instruction operands must be the same size
+selectionSort.asm(15) : error A2082:cannot mix 16- and 32-bit registers
+selectionSort.asm(16) : error A2082:cannot mix 16- and 32-bit registers
+selectionSort.asm(42) : error A2082:cannot mix 16- and 32-bit registers
+selectionSort.asm(43) : error A2082:cannot mix 16- and 32-bit registers
+selectionSort.asm(44) : error A2082:cannot mix 16- and 32-bit registers
+selectionSort.asm(45) : error A2082:cannot mix 16- and 32-bit registers
 ```
+NOTE: Program doesn't require ASM in its current state, but this invalidates the point of this so I'd imagine this is a mistake
 ## \5Transform
 Transforms a given string
 ### Transform.cpp
