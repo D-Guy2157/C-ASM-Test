@@ -4,58 +4,58 @@
 PUBLIC find_first_char, replace_char
 
 find_first_char PROC
-    mov rsi, rdi             ; rsi points to the string (str)
-    xor rdx, rdx             ; rdx holds the index (starting at 0)
+    mov rsi, rdi             
+    xor rdx, rdx             
 
 find_loop:
-    cmp byte ptr [rsi + rdx], 0 ; Check if we have reached the end of the string
+    cmp byte ptr [rsi + rdx], 0 
     je not_found
 
-    mov al, byte ptr [rsi + rdx] ; Load current character into al
+    mov al, byte ptr [rsi + rdx]
 
-    cmp al, sil             ; Compare with c1 (c1 is in sil)
+    cmp al, sil             
     je found_char
-    cmp al, dl              ; Compare with c2 (c2 is in dl)
+    cmp al, dl              
     je found_char
-    cmp al, cl              ; Compare with c3 (c3 is in cl)
+    cmp al, cl              
     je found_char
 
-    inc rdx                 ; Increment index
-    jmp find_loop           ; Repeat loop
+    inc rdx                
+    jmp find_loop         
 
 found_char:
-    mov eax, edx            ; Return the found index in eax (32-bit)
+    mov eax, edx            
     ret
 
 not_found:
-    mov eax, -1             ; Return -1 if no character is found
+    mov eax, -1            
     ret
 find_first_char ENDP
 
 replace_char PROC
-    mov rsi, rdi            ; rsi points to the string (str)
-    mov rcx, rsi            ; rcx = pointer to the string
-    add rcx, rdx            ; Add the index to point to the right character
+    mov rsi, rdi           
+    mov rcx, rsi            
+    add rcx, rdx           
 
-    mov al, byte ptr [rcx]  ; Load the character at the index
+    mov al, byte ptr [rcx] 
 
-    cmp al, sil             ; Compare with c1 (c1 is in sil)
+    cmp al, sil            
     je replace_with_c2
-    cmp al, dl              ; Compare with c2 (c2 is in dl)
+    cmp al, dl             
     je replace_with_c3
-    cmp al, cl              ; Compare with c3 (c3 is in cl)
+    cmp al, cl            
     je replace_with_c1
 
 replace_with_c2:
-    mov byte ptr [rcx], dl  ; Replace with c2
+    mov byte ptr [rcx], dl  
     ret
 
 replace_with_c3:
-    mov byte ptr [rcx], cl  ; Replace with c3
+    mov byte ptr [rcx], cl 
     ret
 
 replace_with_c1:
-    mov byte ptr [rcx], sil ; Replace with c1
+    mov byte ptr [rcx], sil 
     ret
 replace_char ENDP
 
