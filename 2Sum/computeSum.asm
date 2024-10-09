@@ -4,24 +4,30 @@
 PUBLIC _computeSum   
 
 _computeSum PROC
-    mov rbx, rdi        
-    xor rax, rax        
-    mov rcx, rsi        
-    shr rcx, 1          
+    mov rbx, rdi            
+    mov rdx, rdi            
+    mov rax, rsi
+    shl rax, 2
+    sub rax, 4
+    add rdx, rax
+
+    xor rax, rax            
+    mov rcx, rsi           
+    shr rcx, 1              
 
 next_pair:
-    cmp rcx, 0          
+    cmp rcx, 0              
     je end_sum
 
-    mov edx, [rbx]      
-    add rbx, 4          
-    mov esi, [rdi + rsi*4 - 4] 
-    sub edx, esi        
-    add rax, rdx        
+    mov eax, [rbx]          
+    mov esi, [rdx]         
+    sub eax, esi          
+    add rax, rax           
 
-    sub rsi, 1          
-    dec rcx             
-    jmp next_pair       
+    add rbx, 4             
+    sub rdx, 4             
+    dec rcx                
+    jmp next_pair          
 
 end_sum:
     ret
