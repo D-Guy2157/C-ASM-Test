@@ -430,7 +430,8 @@ selectionSort.asm(43) : error A2082:cannot mix 16- and 32-bit registers
 selectionSort.asm(44) : error A2082:cannot mix 16- and 32-bit registers
 selectionSort.asm(45) : error A2082:cannot mix 16- and 32-bit registers
 ```
-NOTE: Program doesn't require ASM in its current state, but this invalidates the point of this so I'd imagine this is a mistake
+NOTE: Program doesn't require ASM in its current state, but this invalidates the point of this so I'd imagine this is a mistake. 
+It is also currently reporting a 0.000000 execution time, this is likley a logic error.
 ## \5Transform
 Transforms a given string
 ### Transform.cpp
