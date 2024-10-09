@@ -21,8 +21,8 @@
   - [reverseArrays.asm](#reversearraysasm)
   - [.output.txt](#outputtxt-3)
   - [errors/issues](#errorsissues-2)
-- [\\4Min](#4min)
-  - [Min.cpp](#mincpp)
+- [\\4Sort](#4sort)
+  - [Sort.cpp](#sortcpp)
   - [findMinIndex.asm](#findminindexasm)
   - [.output.txt](#outputtxt-4)
   - [errors/issues](#errorsissues-3)
@@ -112,7 +112,7 @@ The computed sum is: 0
 
 ```
 ### errors/issues
-Logic Error: Not summing the items in the array.
+Logic Error: Not summing the items in the array, always outputs 0.
 ## \3Reverse
 Reverses the items in an array
 ### Reverse.cpp
@@ -125,31 +125,24 @@ Assembly Source File
 ```
 ### errors/issues
 Logic Error: Nothing is output
-## \4Min
+*Note: Likely getting stuck in a loop, takes a while to finish*
+## \4Sort
 Finds the minimum index of item using selection sort
-### Min.cpp
+### Sort.cpp
 C++ Source File
 ### findMinIndex.asm
 Assembly Source File
 ### .output.txt
 ```txt
-Sorted array in C: 5 9 10 13 14 21 27 29 33 37 
-Execution time in C: 0.000000 seconds.
+N/A - Failed to compile
 ```
 ### errors/issues
-Compile Errors: (for ASM)
+Compile Errors:
 ```
-Assembling: selectionSort.asm 
-selectionSort.asm(9) : error A2022:instruction operands must be the same size
-selectionSort.asm(15) : error A2082:cannot mix 16- and 32-bit registers
-selectionSort.asm(16) : error A2082:cannot mix 16- and 32-bit registers
-selectionSort.asm(42) : error A2082:cannot mix 16- and 32-bit registers
-selectionSort.asm(43) : error A2082:cannot mix 16- and 32-bit registers
-selectionSort.asm(44) : error A2082:cannot mix 16- and 32-bit registers
-selectionSort.asm(45) : error A2082:cannot mix 16- and 32-bit registers
+ Assembling: findMinIndex.asm 
+selectionSort.asm(10) : error A2022:instruction operands must be the same size
+selectionSort.asm(21) : error A2082:cannot mix 16- and 32-bit registers
 ```
-NOTE: Program doesn't require ASM in its current state, but this invalidates the point of this so I'd imagine this is a mistake. 
-It is also currently reporting a 0.000000 execution time, this is likley a logic error.
 ## \5Transform
 Transforms a given string
 ### Transform.cpp
