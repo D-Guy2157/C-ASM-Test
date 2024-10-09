@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-extern "C" int find_first_char(char* str, char c1, char c2, char c3); // Assembly procedure declaration
-extern "C" void replace_char(char* str, int index, char c1, char c2, char c3); // Assembly procedure declaration
+extern "C" int find_first_char(char* str, char c1, char c2, char c3);  // Assembly procedure declaration
+extern "C" void replace_char(char* str, int index, char c1, char c2, char c3);  // Assembly procedure declaration
 
 int main() {
     char str[] = "bonjour tout le monde";
