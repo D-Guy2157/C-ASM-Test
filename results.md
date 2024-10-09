@@ -249,7 +249,8 @@ _reverseArrays PROC
 reverse_loop1:
     cmp rdx, 0          
     je reverse_done1
-    push byte ptr [rbx] 
+    mov al, [rbx]       
+    push rax            
     add rbx, 1          
     dec rdx             
     jmp reverse_loop1   
@@ -260,7 +261,8 @@ reverse_done1:
 reverse_loop2:
     cmp rdx, 4          
     je reverse_done2
-    pop byte ptr [rbx]  
+    pop rax             
+    mov [rbx], al       
     add rbx, 1          
     inc rdx             
     jmp reverse_loop2   
@@ -272,8 +274,9 @@ reverse_done2:
 reverse_loop3:
     cmp rdx, 0          
     je reverse_done3
-    push dword ptr [rbx] 
-    add rbx, 4          
+    mov eax, [rbx]      
+    push rax            
+    add rbx, 4         
     dec rdx             
     jmp reverse_loop3   
 
@@ -283,7 +286,8 @@ reverse_done3:
 reverse_loop4:
     cmp rdx, 4          
     je reverse_done4
-    pop dword ptr [rbx] 
+    pop rax             
+    mov [rbx], eax      
     add rbx, 4          
     inc rdx             
     jmp reverse_loop4   
@@ -296,17 +300,10 @@ END
 ```
 ### .output.txt
 ```txt
-N/A - Did not compile
+<Blank>
 ```
 ### errors/issues
-Compile Errors:
-```
-Assembling: reverseArrays.asm
-reverseArrays.asm(13) : error A2070:invalid instruction operands
-reverseArrays.asm(24) : error A2070:invalid instruction operands
-reverseArrays.asm(36) : error A2070:invalid instruction operands
-reverseArrays.asm(47) : error A2070:invalid instruction operands
-```
+Logic Error: Nothing is output
 ## \4Min
 Finds the minimum index of item using selection sort
 ### Min.cpp
@@ -361,48 +358,49 @@ int main() {
 PUBLIC _findMinIndex, _selectionSort
 
 _findMinIndex PROC
-    mov rbx, rdi
-    mov rcx, rsi
-    mov rdx, rdx
+    mov rbx, rdi            
+    mov ecx, esi           
+    mov edx, rdx            
 
 find_loop:
-    add rcx, 1
-    cmp rcx, rdx
-    jge end_min
-    mov eax, [rbx + rcx*4]
-    cmp eax, [rbx + rsi*4]
-    jl new_min
+    add ecx, 1             
+    cmp ecx, edx            
+    jge end_min            
+    mov eax, [rbx + ecx*4]  
+    cmp eax, [rbx + esi*4]  
+    jl new_min             
     jmp find_loop
 
 new_min:
-    mov esi, rcx
+    mov esi, ecx            
     jmp find_loop
 
 end_min:
-    mov eax, esi
+    mov eax, esi           
     ret
 _findMinIndex ENDP
 
 _selectionSort PROC
-    mov rbx, rdi
-    mov rdx, rsi
-    xor rdi, rdi
+    mov rbx, rdi            
+    mov edx, esi           
+    xor esi, esi            
 
 sort_loop:
-    cmp rdi, rdx
-    jge end_sort
-    mov rsi, rdi
-    call _findMinIndex
-    cmp rdi, eax
-    je next
-    mov ecx, [rbx + rdi*4]
-    mov edx, [rbx + eax*4]
-    mov [rbx + rdi*4], edx
-    mov [rbx + eax*4], ecx
+    cmp esi, edx            
+    jge end_sort            
+    mov ecx, esi            
+    call _findMinIndex      
+    cmp esi, eax            
+    je next                 
+
+    mov edx, [rbx + esi*4]  
+    mov ecx, [rbx + eax*4]
+    mov [rbx + esi*4], ecx
+    mov [rbx + eax*4], edx
 
 next:
-    add rdi, 1
-    jmp sort_loop
+    add esi, 1              
+    jmp sort_loop           
 
 end_sort:
     ret
@@ -418,8 +416,11 @@ N/A - Did not compile
 Compile Errors:
 ```
 Assembling: findMinIndex.asm
-findMinIndex.asm(21) : error A2022:instruction operands must be the same size
-findMinIndex.asm(21) : error A2022:instruction operands must be the same size
+findMinIndex.asm(9) : error A2022:instruction operands must be the same size
+findMinIndex.asm(15) : error A2082:cannot mix 16- and 32-bit registers
+findMinIndex.asm(16) : error A2082:cannot mix 16- and 32-bit registers
 findMinIndex.asm(42) : error A2082:cannot mix 16- and 32-bit registers
+findMinIndex.asm(43) : error A2082:cannot mix 16- and 32-bit registers
 findMinIndex.asm(44) : error A2082:cannot mix 16- and 32-bit registers
+findMinIndex.asm(45) : error A2082:cannot mix 16- and 32-bit registers
 ```
