@@ -27,6 +27,11 @@
   - [findMinIndex.asm](#findminindexasm)
   - [.output.txt](#outputtxt-4)
   - [errors/issues](#errorsissues-4)
+- [\\5Transform](#5transform)
+  - [Transform.cpp](#transformcpp)
+  - [findReplace.asm](#findreplaceasm)
+  - [.output.txt](#outputtxt-5)
+  - [errors/issues](#errorsissues-5)
 
 ## Compiling
 All of this was compiled using the following commands:
@@ -424,3 +429,100 @@ findMinIndex.asm(43) : error A2082:cannot mix 16- and 32-bit registers
 findMinIndex.asm(44) : error A2082:cannot mix 16- and 32-bit registers
 findMinIndex.asm(45) : error A2082:cannot mix 16- and 32-bit registers
 ```
+## \5Transform
+Transforms a given string
+### Transform.cpp
+```cpp
+#include <stdio.h>
+#include <string.h>
+
+extern "C" int find_first_char(char* str, char c1, char c2, char c3); // Assembly procedure declaration
+extern "C" void replace_char(char* str, int index, char c1, char c2, char c3); // Assembly procedure declaration
+
+int main() {
+    char str[] = "bonjour tout le monde";
+    char c1 = 'b', c2 = 'o', c3 = 't';
+
+    printf("Original string: %s\n", str);
+
+    int index = 0;
+    while ((index = find_first_char(str + index, c1, c2, c3)) != -1) {
+        replace_char(str, index, c1, c2, c3);
+        index++;  // Move to the next character
+    }
+
+    printf("Transformed string: %s\n", str);
+    return 0;
+}
+```
+### findReplace.asm
+```assembly
+.data
+
+.code
+PUBLIC find_first_char, replace_char
+
+find_first_char PROC
+    mov rsi, rdi             
+    xor rdx, rdx             
+
+find_loop:
+    cmp byte ptr [rsi + rdx], 0 
+    je not_found
+
+    mov al, byte ptr [rsi + rdx] 
+
+    cmp al, sil             
+    je found_char
+    cmp al, dl              
+    je found_char
+    cmp al, cl              
+    je found_char
+
+    inc rdx                
+    jmp find_loop          
+
+found_char:
+    mov eax, edx            
+    ret
+
+not_found:
+    mov eax, -1             
+    ret
+find_first_char ENDP
+
+replace_char PROC
+    mov rsi, rdi            
+    mov eax, esi            
+
+    mov al, byte ptr [rsi + rdx] 
+    cmp al, sil             
+    je replace_with_c2
+    cmp al, dl              
+    je replace_with_c3
+    cmp al, cl              
+    je replace_with_c1
+
+replace_with_c2:
+    mov byte ptr [rsi + rdi], dl 
+    ret
+
+replace_with_c3:
+    mov byte ptr [rsi + rdi], cl 
+    ret
+
+replace_with_c1:
+    mov byte ptr [rsi + rdi], sil 
+    ret
+replace_char ENDP
+
+END
+```
+### .output.txt
+```txt
+Original string: bonjour tout le monde
+Transformed string: bonjour tout le monde
+
+```
+### errors/issues
+Logic Error: String is not being modified
