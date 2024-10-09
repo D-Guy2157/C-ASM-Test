@@ -10,7 +10,8 @@ _reverseArrays PROC
 reverse_loop1:
     cmp rdx, 0          
     je reverse_done1
-    push byte ptr [rbx] 
+    mov al, [rbx]       
+    push rax            
     add rbx, 1          
     dec rdx             
     jmp reverse_loop1   
@@ -21,7 +22,8 @@ reverse_done1:
 reverse_loop2:
     cmp rdx, 4          
     je reverse_done2
-    pop byte ptr [rbx]  
+    pop rax             
+    mov [rbx], al       
     add rbx, 1          
     inc rdx             
     jmp reverse_loop2   
@@ -33,8 +35,9 @@ reverse_done2:
 reverse_loop3:
     cmp rdx, 0          
     je reverse_done3
-    push dword ptr [rbx] 
-    add rbx, 4          
+    mov eax, [rbx]      
+    push rax            
+    add rbx, 4         
     dec rdx             
     jmp reverse_loop3   
 
@@ -44,7 +47,8 @@ reverse_done3:
 reverse_loop4:
     cmp rdx, 4          
     je reverse_done4
-    pop dword ptr [rbx] 
+    pop rax             
+    mov [rbx], eax      
     add rbx, 4          
     inc rdx             
     jmp reverse_loop4   
